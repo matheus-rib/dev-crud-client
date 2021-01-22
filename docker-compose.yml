@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: dev.Dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ~/.gitconfig:/etc/.gitconfig
+    user: '1000'
+    command: bash -c "yarn && yarn start"
+    env_file: .env.local
+    ports:
+      - 3000:3000
