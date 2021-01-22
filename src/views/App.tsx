@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import GlobalStyle from '@/styles/globals'
 
 function App(): JSX.Element {
   return (
@@ -19,6 +20,7 @@ function App(): JSX.Element {
           Learn React
         </a>
       </header>
+      <GlobalStyle />
     </div>
   )
 }
