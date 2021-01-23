@@ -1,21 +1,21 @@
-import { ApiError, Developer, PaginatedList } from '@/utils/types'
-import { useCallback, useState } from 'react'
 import developersServices from '@/services/developers'
 import {
   emptyApiError,
   emptyDeveloper,
   emptyDevelopersList,
 } from '@/utils/emptyState'
+import { ApiError, Developer, PaginatedList } from '@/utils/types'
+import { useCallback, useState } from 'react'
 
 type Developers = {
   developersList: PaginatedList<Developer>
   currentDeveloper: Developer
   error: ApiError
-  fetchDevelopersList: FunctionStringCallback
-  fetchCurrentDeveloper: FunctionStringCallback
-  createDeveloper: FunctionStringCallback
-  updateDeveloper: FunctionStringCallback
-  destroyDeveloper: FunctionStringCallback
+  fetchDevelopersList: CallableFunction
+  fetchCurrentDeveloper: CallableFunction
+  createDeveloper: CallableFunction
+  updateDeveloper: CallableFunction
+  destroyDeveloper: CallableFunction
 }
 
 export default function useDevelopers(): Developers {
