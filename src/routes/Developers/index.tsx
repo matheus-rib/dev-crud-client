@@ -4,7 +4,6 @@ import React from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 const Developers: React.FC = () => {
   const { path } = useRouteMatch()
-  console.log(path)
 
   return (
     <div>
