@@ -1,3 +1,4 @@
+import HeaderComponent from '@/components/HeaderComponent'
 import DevelopersForm from '@/views/Developers/DevelopersForm'
 import DevelopersList from '@/views/Developers/DevelopersList'
 import React from 'react'
@@ -6,7 +7,7 @@ const Developers: React.FC = () => {
   const { path } = useRouteMatch()
 
   return (
-    <div>
+    <HeaderComponent>
       <Route exact path={path}>
         <DevelopersList />
       </Route>
@@ -16,7 +17,7 @@ const Developers: React.FC = () => {
       <Route path={`${path}edit/:developerId`}>
         <DevelopersForm />
       </Route>
-    </div>
+    </HeaderComponent>
   )
 }
 
