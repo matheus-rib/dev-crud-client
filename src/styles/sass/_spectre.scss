@@ -7,3 +7,14 @@
 .bg-base {
   background: $base-bg !important;
 }
+
+// Custom Table
+.table td, .table th {
+  padding: 0;
+  border-bottom: 0.03rem solid lighten($secondary-color, 15%);
+  color: $secondary-color;
+}
+
+.table.table-hover tbody tr:hover {
+  background: lighten($base-bg, 15%);
+}
