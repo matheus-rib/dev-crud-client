@@ -24,3 +24,12 @@ export const emptyApiError: ApiError = {
   message: '',
   additionalProperties: null,
 }
+
+export const emptyDevelopersFilter = {
+  id: '',
+  name: '',
+  gender: '',
+  hobby: '',
+  dateOfBirth: '',
+  age: '',
+}
