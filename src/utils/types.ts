@@ -34,3 +34,12 @@ export type ListParams = {
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
+
+export type DeveloperFilterQuery = {
+  id?: string
+  name?: string
+  gender?: GenderType | string
+  hobby?: string
+  dateOfBirth?: string
+  age?: string
+}
