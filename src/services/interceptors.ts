@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-promise-reject-errors */
 import { ApiError } from '@/utils/types'
 import { AxiosError } from 'axios'
