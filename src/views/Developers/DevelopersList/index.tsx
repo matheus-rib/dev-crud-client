@@ -71,8 +71,6 @@ const DevelopersList: React.FC = () => {
 
   const confirmDeveloperDestruction = useCallback(
     developerId => {
-      console.log('aqui')
-
       confirmAlert({
         title: 'Excluir desenvolvedor',
         message: `Deseja excluir o desenvolvedor com ID ${developerId}?`,
