@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const Container = styled.div.attrs({
   className: 'bg-base container',
 })`
-  min-height: 100vh;
+  min-height: calc(100vh - 57px);
 `
 
 export const NavbarLinkButton = styled(NavLink).attrs({
