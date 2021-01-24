@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable multiline-ternary */
 import Flexbox from '@/components/Flexbox'
 import Form from '@/components/Form'
@@ -16,6 +14,8 @@ import {
   FormHeader,
 } from './styles'
 import genderMask from '@/utils/masks/gender'
+import { useAlert } from 'react-alert'
+import { DeepPartial, Developer } from '@/utils/types'
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -26,6 +26,7 @@ const schema = yup.object().shape({
 
 const DevelopersForm: React.FC = () => {
   const { developerId } = useParams<{ developerId?: string }>()
+  const alert = useAlert()
   const [firstLoad, setFirstLoad] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isDeveloperCreate, setIsDeveloperCreate] = useState(true)
@@ -41,7 +42,7 @@ const DevelopersForm: React.FC = () => {
       setLoading(true)
       await fetchCurrentDeveloper(developerId)
     } catch (e) {
-      console.log(e)
+      alert.error(e.message)
     } finally {
       setLoading(false)
       setFirstLoad(true)
@@ -52,14 +53,17 @@ const DevelopersForm: React.FC = () => {
     async form => {
       try {
         setLoading(true)
-
+        let message = ''
         if (isDeveloperCreate) {
           await createDeveloper(form)
+          message = 'Desenvolvedor criado com sucesso'
         } else {
           await updateDeveloper(form)
+          message = 'Desenvolvedor atualizado com sucesso'
         }
+        alert.success(message)
       } catch (e) {
-        console.log(e)
+        alert.error(e.message)
       } finally {
         setLoading(false)
       }
@@ -110,9 +114,9 @@ const DevelopersForm: React.FC = () => {
               isValid,
               touched,
             }: {
-              errors: any
-              isValid: any
-              touched: any
+              errors: DeepPartial<Developer>
+              isValid: boolean
+              touched: DeepPartial<Developer>
             }) => (
               <Form.ValidationForm>
                 <Flexbox.Columns>
