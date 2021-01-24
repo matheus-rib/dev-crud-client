@@ -47,7 +47,7 @@ const DevelopersForm: React.FC = () => {
       setLoading(false)
       setFirstLoad(true)
     }
-  }, [])
+  }, [alert, developerId, fetchCurrentDeveloper])
 
   const onSubmit = useCallback(
     async form => {
@@ -68,7 +68,7 @@ const DevelopersForm: React.FC = () => {
         setLoading(false)
       }
     },
-    [isDeveloperCreate],
+    [alert, createDeveloper, isDeveloperCreate, updateDeveloper],
   )
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const DevelopersForm: React.FC = () => {
     } else {
       setFirstLoad(true)
     }
-  }, [fetchDeveloper, developerId, firstLoad])
+  }, [fetchDeveloper, developerId, firstLoad, currentDeveloper.id])
 
   return (
     <Container>
