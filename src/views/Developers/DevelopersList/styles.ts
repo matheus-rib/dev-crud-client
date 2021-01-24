@@ -19,6 +19,14 @@ export const TooltipLeft = styled.div.attrs({
   className: 'tooltip tooltip-left',
 })``
 
+export const TooltipLeftLink = styled(NavLink).attrs({
+  className: 'tooltip tooltip-left',
+})`
+  &:visited {
+    color: inherit;
+  }
+`
+
 export const Table = styled.table.attrs({
   className: 'table table-hover',
 })``

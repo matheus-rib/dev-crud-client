@@ -19,6 +19,7 @@ import {
   TableTitle,
   TooltipLeft,
   PaginationContainer,
+  TooltipLeftLink,
 } from './styles'
 
 type FilterParams = {
@@ -114,9 +115,12 @@ const DevelopersList: React.FC = () => {
                 <td>{developer.hobby}</td>
                 <td>
                   <ActionsContainer>
-                    <TooltipLeft data-tooltip="Editar dev">
+                    <TooltipLeftLink
+                      data-tooltip="Editar dev"
+                      to={`/edit/${developer.id}`}
+                    >
                       <i className="fas fa-edit" />
-                    </TooltipLeft>
+                    </TooltipLeftLink>
                     <TooltipLeft data-tooltip="Deletar dev">
                       <i className="fas fa-trash-alt" />
                     </TooltipLeft>

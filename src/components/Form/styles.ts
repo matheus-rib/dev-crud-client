@@ -44,7 +44,7 @@ export const Hint = styled.div.attrs(({ className }) => ({
 export const Formik = styled(FormikBase)``
 
 export const ValidationField = styled(FormikField).attrs(({ className }) => ({
-  className: `form-input ${className}`,
+  className: `form-input ${className} bg-base text-primary`,
 }))``
 
 export const ValidationForm = styled(FormikForm)``
