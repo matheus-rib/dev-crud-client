@@ -10,6 +10,7 @@ import ReactPaginate from 'react-paginate'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 import ResultsSelector from './ResultsSelector'
+import { confirmAlert } from 'react-confirm-alert'
 import {
   ActionsContainer,
   Container,
@@ -21,6 +22,7 @@ import {
   PaginationContainer,
   TooltipLeftLink,
 } from './styles'
+import { useAlert } from 'react-alert'
 
 type FilterParams = {
   page: number
@@ -29,8 +31,13 @@ type FilterParams = {
 }
 
 const DevelopersList: React.FC = () => {
-  const { developersList, fetchDevelopersList } = useDevelopers()
+  const {
+    developersList,
+    fetchDevelopersList,
+    destroyDeveloper,
+  } = useDevelopers()
   const [modalActive, setModalActive] = useState(false)
+  const alert = useAlert()
   const [queryQ, setQueryQ] = useState<DeveloperFilterQuery>(
     emptyDevelopersFilter,
   )
@@ -42,7 +49,7 @@ const DevelopersList: React.FC = () => {
 
   const fetchList = useCallback(async () => {
     await fetchDevelopersList(query)
-  }, [query])
+  }, [fetchDevelopersList, query])
 
   const setFilter = useCallback(
     query => {
@@ -53,7 +60,7 @@ const DevelopersList: React.FC = () => {
 
   const setFilterQuery = useCallback(() => {
     setQuery({ ...query, q: queryQ })
-  }, [setQuery, queryQ])
+  }, [query, queryQ])
 
   const setFilterPage = useCallback(
     page => {
@@ -62,6 +69,37 @@ const DevelopersList: React.FC = () => {
     [setQuery, query],
   )
 
+  const confirmDeveloperDestruction = useCallback(
+    developerId => {
+      console.log('aqui')
+
+      confirmAlert({
+        title: 'Excluir desenvolvedor',
+        message: `Deseja excluir o desenvolvedor com ID ${developerId}?`,
+        buttons: [
+          {
+            label: 'Sim',
+            className: 'btn btn-primary',
+            onClick: async () => {
+              try {
+                await destroyDeveloper(developerId)
+                await fetchList()
+                alert.success('Desenvolvedor excluido com sucesso')
+              } catch (e) {
+                alert.error(e.message)
+              }
+            },
+          },
+          {
+            label: 'Não',
+            className: 'btn',
+            onClick: () => ({}),
+          },
+        ],
+      })
+    },
+    [alert, destroyDeveloper, fetchList],
+  )
   const setFilterTake = useCallback(
     take => {
       setQuery({ ...query, take, page: 1 })
@@ -121,7 +159,10 @@ const DevelopersList: React.FC = () => {
                     >
                       <i className="fas fa-edit" />
                     </TooltipLeftLink>
-                    <TooltipLeft data-tooltip="Deletar dev">
+                    <TooltipLeft
+                      data-tooltip="Deletar dev"
+                      onClick={() => confirmDeveloperDestruction(developer.id)}
+                    >
                       <i className="fas fa-trash-alt" />
                     </TooltipLeft>
                   </ActionsContainer>

@@ -23,13 +23,15 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "react-hooks"
   ],
   "rules": {
     "prettier/prettier": "error",
     "space-before-function-paren": "off",
     "react/prop-types": "off",
     "no-use-before-define": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

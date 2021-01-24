@@ -41,17 +41,20 @@ export default function useDevelopers(): Developers {
     }
   }, [])
 
-  const createDeveloper = useCallback(async params => {
-    try {
-      const data = await developersServices.create(params)
-      setDevelopersList({
-        ...developersList,
-        rows: [...developersList.rows, { ...data }],
-      })
-    } catch (e) {
-      setError(e)
-    }
-  }, [])
+  const createDeveloper = useCallback(
+    async params => {
+      try {
+        const data = await developersServices.create(params)
+        setDevelopersList({
+          ...developersList,
+          rows: [...developersList.rows, { ...data }],
+        })
+      } catch (e) {
+        setError(e)
+      }
+    },
+    [developersList],
+  )
 
   const updateDeveloper = useCallback(async params => {
     try {
