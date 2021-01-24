@@ -40,3 +40,9 @@ export const ActionsContainer = styled.div.attrs({
     cursor: pointer;
   }
 `
+export const PaginationContainer = styled.div.attrs({
+  className: 'd-flex',
+})`
+  justify-content: space-between;
+  align-items: center;
+`

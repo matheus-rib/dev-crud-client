@@ -6,8 +6,10 @@ import dateMask from '@/utils/masks/date'
 import genderMask from '@/utils/masks/gender'
 import { DeveloperFilterQuery } from '@/utils/types'
 import React, { useCallback, useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
+import ResultsSelector from './ResultsSelector'
 import {
   ActionsContainer,
   Container,
@@ -16,6 +18,7 @@ import {
   Table,
   TableTitle,
   TooltipLeft,
+  PaginationContainer,
 } from './styles'
 
 type FilterParams = {
@@ -50,6 +53,20 @@ const DevelopersList: React.FC = () => {
   const setFilterQuery = useCallback(() => {
     setQuery({ ...query, q: queryQ })
   }, [setQuery, queryQ])
+
+  const setFilterPage = useCallback(
+    page => {
+      setQuery({ ...query, page })
+    },
+    [setQuery, query],
+  )
+
+  const setFilterTake = useCallback(
+    take => {
+      setQuery({ ...query, take, page: 1 })
+    },
+    [setQuery, query],
+  )
 
   useEffect(() => {
     fetchList()
@@ -134,6 +151,24 @@ const DevelopersList: React.FC = () => {
             />
           }
         ></Modal>
+        <PaginationContainer>
+          <ReactPaginate
+            pageCount={developersList.pages}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={3}
+            onPageChange={({ selected }) => setFilterPage(selected + 1)}
+            containerClassName="pagination"
+            pageClassName="page-item c-hand"
+            previousLabel=""
+            nextLabel=""
+            previousLinkClassName="fas fa-chevron-left mx-2"
+            nextLinkClassName="fas fa-chevron-right mx-2"
+            activeClassName="active"
+            disabledClassName="disabled"
+            forcePage={developersList.page - 1}
+          />
+          <ResultsSelector take={query.take} onChangeSelector={setFilterTake} />
+        </PaginationContainer>
       </Container>
     </>
   )
